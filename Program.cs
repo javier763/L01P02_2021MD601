@@ -1,7 +1,16 @@
+using _2021MD601.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<db_notasContext>(options =>
+        options.UseSqlServer(
+                builder.Configuration.GetConnectionString("notasDbConnection")
+        )
+);
 
 var app = builder.Build();
 

@@ -10,22 +10,22 @@ using _2021MD601.Models;
 
 namespace _2021MD601.Controllers
 {
-    public class materiasController : Controller
+    public class departamentosController : Controller
     {
         private readonly db_notasContext _context;
 
-        public materiasController(db_notasContext context)
+        public departamentosController(db_notasContext context)
         {
             _context = context;
         }
 
-        // GET: materias
+        // GET: departamentos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.materias.ToListAsync());
+            return View(await _context.departamentos.ToListAsync());
         }
 
-        // GET: materias/Details/5
+        // GET: departamentos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace _2021MD601.Controllers
                 return NotFound();
             }
 
-            var materias = await _context.materias
+            var departamentos = await _context.departamentos
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (materias == null)
+            if (departamentos == null)
             {
                 return NotFound();
             }
 
-            return View(materias);
+            return View(departamentos);
         }
 
-        // GET: materias/Create
+        // GET: departamentos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: materias/Create
+        // POST: departamentos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,materia,unidades_valorativas,estado")] materias materias)
+        public async Task<IActionResult> Create([Bind("id,departamento")] departamentos departamentos)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(materias);
+                _context.Add(departamentos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(materias);
+            return View(departamentos);
         }
 
-        // GET: materias/Edit/5
+        // GET: departamentos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace _2021MD601.Controllers
                 return NotFound();
             }
 
-            var materias = await _context.materias.FindAsync(id);
-            if (materias == null)
+            var departamentos = await _context.departamentos.FindAsync(id);
+            if (departamentos == null)
             {
                 return NotFound();
             }
-            return View(materias);
+            return View(departamentos);
         }
 
-        // POST: materias/Edit/5
+        // POST: departamentos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,materia,unidades_valorativas,estado")] materias materias)
+        public async Task<IActionResult> Edit(int id, [Bind("id,departamento")] departamentos departamentos)
         {
-            if (id != materias.id)
+            if (id != departamentos.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace _2021MD601.Controllers
             {
                 try
                 {
-                    _context.Update(materias);
+                    _context.Update(departamentos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!materiasExists(materias.id))
+                    if (!departamentosExists(departamentos.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace _2021MD601.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(materias);
+            return View(departamentos);
         }
 
-        // GET: materias/Delete/5
+        // GET: departamentos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace _2021MD601.Controllers
                 return NotFound();
             }
 
-            var materias = await _context.materias
+            var departamentos = await _context.departamentos
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (materias == null)
+            if (departamentos == null)
             {
                 return NotFound();
             }
 
-            return View(materias);
+            return View(departamentos);
         }
 
-        // POST: materias/Delete/5
+        // POST: departamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var materias = await _context.materias.FindAsync(id);
-            if (materias != null)
+            var departamentos = await _context.departamentos.FindAsync(id);
+            if (departamentos != null)
             {
-                _context.materias.Remove(materias);
+                _context.departamentos.Remove(departamentos);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool materiasExists(int id)
+        private bool departamentosExists(int id)
         {
-            return _context.materias.Any(e => e.id == id);
+            return _context.departamentos.Any(e => e.id == id);
         }
     }
 }

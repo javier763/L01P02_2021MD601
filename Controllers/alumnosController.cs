@@ -10,22 +10,22 @@ using _2021MD601.Models;
 
 namespace _2021MD601.Controllers
 {
-    public class materiasController : Controller
+    public class alumnosController : Controller
     {
         private readonly db_notasContext _context;
 
-        public materiasController(db_notasContext context)
+        public alumnosController(db_notasContext context)
         {
             _context = context;
         }
 
-        // GET: materias
+        // GET: alumnos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.materias.ToListAsync());
+            return View(await _context.alumnos.ToListAsync());
         }
 
-        // GET: materias/Details/5
+        // GET: alumnos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace _2021MD601.Controllers
                 return NotFound();
             }
 
-            var materias = await _context.materias
+            var alumnos = await _context.alumnos
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (materias == null)
+            if (alumnos == null)
             {
                 return NotFound();
             }
 
-            return View(materias);
+            return View(alumnos);
         }
 
-        // GET: materias/Create
+        // GET: alumnos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: materias/Create
+        // POST: alumnos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,materia,unidades_valorativas,estado")] materias materias)
+        public async Task<IActionResult> Create([Bind("id,codigo,apellidos,dui,estado")] alumnos alumnos)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(materias);
+                _context.Add(alumnos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(materias);
+            return View(alumnos);
         }
 
-        // GET: materias/Edit/5
+        // GET: alumnos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace _2021MD601.Controllers
                 return NotFound();
             }
 
-            var materias = await _context.materias.FindAsync(id);
-            if (materias == null)
+            var alumnos = await _context.alumnos.FindAsync(id);
+            if (alumnos == null)
             {
                 return NotFound();
             }
-            return View(materias);
+            return View(alumnos);
         }
 
-        // POST: materias/Edit/5
+        // POST: alumnos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,materia,unidades_valorativas,estado")] materias materias)
+        public async Task<IActionResult> Edit(int id, [Bind("id,codigo,apellidos,dui,estado")] alumnos alumnos)
         {
-            if (id != materias.id)
+            if (id != alumnos.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace _2021MD601.Controllers
             {
                 try
                 {
-                    _context.Update(materias);
+                    _context.Update(alumnos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!materiasExists(materias.id))
+                    if (!alumnosExists(alumnos.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace _2021MD601.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(materias);
+            return View(alumnos);
         }
 
-        // GET: materias/Delete/5
+        // GET: alumnos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace _2021MD601.Controllers
                 return NotFound();
             }
 
-            var materias = await _context.materias
+            var alumnos = await _context.alumnos
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (materias == null)
+            if (alumnos == null)
             {
                 return NotFound();
             }
 
-            return View(materias);
+            return View(alumnos);
         }
 
-        // POST: materias/Delete/5
+        // POST: alumnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var materias = await _context.materias.FindAsync(id);
-            if (materias != null)
+            var alumnos = await _context.alumnos.FindAsync(id);
+            if (alumnos != null)
             {
-                _context.materias.Remove(materias);
+                _context.alumnos.Remove(alumnos);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool materiasExists(int id)
+        private bool alumnosExists(int id)
         {
-            return _context.materias.Any(e => e.id == id);
+            return _context.alumnos.Any(e => e.id == id);
         }
     }
 }
